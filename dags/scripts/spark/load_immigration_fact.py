@@ -23,8 +23,9 @@ def createImmigrationRDD(spark, files):
         immigration_df.i94bir.alias('age'),
         immigration_df.i94visa.alias('visa_categories'),
         immigration_df.gender
-    )
+    ).dropDuplicates()
 
+    immigration_df = immigration_df.withColumn('person_id', F.monotonically_increasing_id())
     return immigration_df
 
 def main():
