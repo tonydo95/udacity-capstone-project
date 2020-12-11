@@ -12,7 +12,17 @@ The fact table containing the people going to the US by airplane is extracted fr
 
 The project uses spark for data processing and airflow to monitor the entire procedures of the project. Because the data is huge, the data processing is on the AWS EMR through the spark submit from the client or local machine. The final dataset will be sent to the AWS S3.
 
-**Tools:** Docker, Apache Airflow, Apache Spark, Amazon S3 and Amazon EMR
+
+### Use Cases
+
+- The data can be used to study the impact of temperature having on the population of each states. The further analysis is the further impact by gender on each state.
+- The analysists can use data to determine the types of visas that commonly used, how long the people stay in each states that is impacted by the temperature. The impact of temperature on the rate on immigration by city.
+
+### Queries
+
+- Find the average immigration trafiic at a given state by month.
+- Find the average ages of immigrants at given state by month.
+- Find the total numbers of imcoming immigratnts for the given states by month.
 
 ### App Architecture
 
@@ -26,9 +36,17 @@ The project uses spark for data processing and airflow to monitor the entire pro
 
 ### Data Model
 
-The data model is the star schema with the fact and dimension tables. It is optimized for OLAP (Online Analytical Processing) operations.
+The data model is the star schema with the fact table `immigration_people` and dimension tables namely `temperature_dimension` and `us_states_dimension`. The reason for this model because I found the relationship between the different datasets which have a common keys are time and states. It is also optimized for OLAP (Online Analytical Processing) operations. All the result data will be stored on S3 bucket.
 
 ![data_model](diagrams/data_model.png)
+
+### Tools and Technologies
+
+- **Apache Spark** - It was needed to convert the large data SAS to json data files. From json data files and csv files, spark will process data and maps the columns from the datasets to the relevant columns for the data models.
+- **Apache Airflow** - It was required to automate workflows. It will uploads the data and scripts files from local filesystem to s3, create the AWS EMR cluster and submit scripts files to process data on the AWS EMR. Finally, it will store final data to S3 bucket and terminate the AWS EMR when tasks are completed.
+- **Docker** - It will install the required Apache Airflow on the container of the Docker space. So the users won't care much about how to setup the Apache Airflow configuration.
+- **Amazon S3** - Stores all datasets, scripts files and the final data model.
+- **Amazon EMR** - The datasets are large to be processed on the local machine. It is needed for the powerful remote cluster to handle all the process of data.
 
 ### DAGs Airflow Graph
 
@@ -103,6 +121,10 @@ $ sh shutdown-airflow.sh
 ```
 
 **Note**: If your job fails or you stop Airflow instance make sure to check your AWS EMR UI console to terminate any running EMR cluster.
+
+### Suggestion for Data Update Frequency
+
+The data should be updated daily or montly, so the data model is always updated for every month for all datasets in order to increase the accurate analysis.
 
 ### Possible Scenarios and How to handle them
 
