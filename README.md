@@ -28,6 +28,8 @@ The project uses spark for data processing and airflow to monitor the entire pro
 
 The data model is the star schema with the fact and dimension tables. It is optimized for OLAP (Online Analytical Processing) operations.
 
+![data_model](diagrams/data_model.png)
+
 ### DAGs Airflow Graph
 
 **Upload Data to S3 DAG**
