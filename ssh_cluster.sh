@@ -1,0 +1,1 @@
+ssh -i my_key.pem hadoop@ec2-54-67-60-57.us-west-1.compute.amazonaws.com
