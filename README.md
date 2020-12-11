@@ -50,10 +50,10 @@ The data model is the star schema with the fact table `immigration_people` and d
 
 ### DAGs Airflow Graph
 
-####Upload Data to S3 DAG
+#### Upload Data to S3 DAG
 ![data_s3_dag](diagrams/file_upload_dag.png)
 
-####Capstone DAG
+#### Capstone DAG
 ![capstone_dag](diagrams/capstone_dag.png)
 
 ### Setup
