@@ -72,9 +72,11 @@ $ git clone git@github.com:
 
 #### Steps to Generate Data to Upload to S3 Bucket
 
-1. Retrieve the `GlobalLandTemperaturesByState.csv` from [Kaggle](https://www.kaggle.com/berkeleyearth/climate-change-earth-surface-temperature-data) and the `us-cities-demographics.csv` from [OpenSoft](https://public.opendatasoft.com/explore/dataset/us-cities-demographics/export/), then store them into directory `data/dimension-data`.
+1. Create directories `./data/dimension-data` and `./data/immigration-data`.
 
-2. Pull the Immigration files in SAS format from the [source](https://travel.trade.gov/research/reports/i94/historical/2016.html) to the `raw_sas_data` directory. Then run the following command
+2. Retrieve the `GlobalLandTemperaturesByState.csv` from [Kaggle](https://www.kaggle.com/berkeleyearth/climate-change-earth-surface-temperature-data) and the `us-cities-demographics.csv` from [OpenSoft](https://public.opendatasoft.com/explore/dataset/us-cities-demographics/export/), then store them into directory `data/dimension-data`.
+
+3. Create directories `./raw_sas_data`. Pull the Immigration files in SAS format from the [source](https://travel.trade.gov/research/reports/i94/historical/2016.html) to the `raw_sas_data` directory. Then run the following command
 
 ```
 $ python convert_data_to_json.py
